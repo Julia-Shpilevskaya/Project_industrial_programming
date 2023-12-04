@@ -80,7 +80,7 @@ class Compression_zipTest {
 
         String zipFilename = "archive.zip";
 
-        comp.compress("file1","archive","txt");
+        comp.compress("file1","archive.txt");
 
         File zipFile = new File(zipFilename);
 

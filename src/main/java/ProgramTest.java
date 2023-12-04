@@ -3,8 +3,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 class ProgramTest {
 
@@ -30,6 +30,29 @@ class ProgramTest {
 
     @Test
     void write_to_fail() {
+        File file1 = new File("file10.txt");
+        String text="Test write_from_file";
+
+        Program pr = new Program();
+
+        pr.write_to_fail(text,"file10.txt");
+
+        String txt_in_file = "";
+
+        try(FileReader reader = new FileReader("file10.txt"))//чтение из файла
+        {
+            int c;
+            while((c =reader.read())!=-1)
+            {
+                txt_in_file += (char)c;
+            }
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        Assert.assertEquals(text,txt_in_file);
     }
 
     @Test
@@ -49,14 +72,8 @@ class ProgramTest {
 
         Program pr = new Program();
 
-        pr.read_from_file("file1","txt");
-
-        Scanner in = new Scanner(System.in);
-
-        String txt_in_file = in.nextLine();
+        String txt_in_file = pr.read_from_file("file1","txt");
 
         Assert.assertEquals(text,txt_in_file);
-
-        in.close();
     }
 }

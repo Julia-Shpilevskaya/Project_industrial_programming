@@ -6,33 +6,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-public class Compression_zip// extends DataSourceDecorator
+public class Compression_zip
 {
-    //private int compLevel = 6;
-
-
-    //public  CompressionDecorator(DataSource source){
-      //  super(source);
-    //}
-
-    //public int getCompressionLevel(){
-      //  return compLevel;
-    //}
-
-    //public void setCompressionLevel(int value){
-      //  compLevel=value;
-    //}
-
-    //@Override
-    //public void writeData(String data){
-      //  super.writeData(compress(data));
-    //}
-
-    //@Override
-    //public String readData(){
-      //  return decompress(super.readData());
-    //}
-
     public static void decompress(String filename_out,String zip_name)
     {
         try(ZipInputStream zin = new ZipInputStream(new FileInputStream(zip_name+".zip")))
@@ -73,12 +48,12 @@ public class Compression_zip// extends DataSourceDecorator
     }
 
 
-    public static void compress(String filename_in, String zip_name,String file_type)
+    public static void compress(String filename_in, String zip_name)
     {
         try(ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zip_name+".zip"));
-            FileInputStream fis= new FileInputStream(filename_in+"."+file_type);)
+            FileInputStream fis= new FileInputStream(filename_in);)
         {
-            ZipEntry entry1=new ZipEntry(filename_in+"."+file_type);
+            ZipEntry entry1=new ZipEntry(filename_in);
             zout.putNextEntry(entry1);
             // считываем содержимое файла в массив byte
             byte[] buffer2 = new byte[fis.available()];

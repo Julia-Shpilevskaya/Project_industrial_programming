@@ -29,48 +29,88 @@ public class Program {
         System.out.print("Input text in: ");
         String text = in.nextLine();
 
-        write_to_fail(text,filename,file_type);
-
-        read_from_file(filename,file_type);
 
         int n = 0;
 
-        System.out.print("Is your file archived?)\nEnter 3, if \"YES\"\nEnter 4, if \"NO\"");
+        System.out.print("Want use Decorator\nEnter 1\n Don't want use  \nEnter 2\n");
         n = in.nextInt();
-        if(n==3)
+
+        if(n==1)
         {
-            System.out.print("\nWant to zip, enter 1\n ");
+            int answer;
+
+            System.out.print("Is your file encrypted and compressed? ( YES = 1\\NO )\n");
+            answer = in.nextInt();
+
+            if(answer == 1)
+            {
+                //FileDecoratorEnc enc = new FileDecoratorEnc(filename+"."+file_type);
+
+//                DataSourceDecorator enc = null;// = new DataSourceDecorator(enc);
+//
+//                FileDecoratorEnc enc1 = new FileDecoratorEnc(enc);
+//                enc.write(text);
+//
+//                String t = enc.read();
+//
+//                System.out.print("Text in file: ");
+//                System.out.print(t);
+            }
+            else
+            {
+                System.out.print("Is your file  compressed? ( YES\\NO )\n");
+                //answer = in.next();
+
+                //if(answer=="YES")
+               // {
+//                    FileDecoratorGzip file_dec = new FileDecoratorGzip(filename+"."+file_type);
+//
+//                    file_dec.decompress();
+//                    String txt111 = file_dec.read();
+                //}
+            }
+        }
+        else if (n==2)
+        {
+            write_to_fail(text, filename);
+
+            String txt_from_file = read_from_file(filename, file_type);
+            System.out.print("Text in file: ");
+            System.out.print(txt_from_file);
+
+            System.out.print("Is your file archived?)\nEnter 3, if \"YES\"\nEnter 4, if \"NO\"");
             n = in.nextInt();
-        }
+            if (n == 3) {
+                System.out.print("\nWant zip, enter 10\n ");
+                n = in.nextInt();
+            }
 
-        if(n==1)
-        {
-            Compress_File_to_zip(filename, file_type);
+            if (n == 10) {
+                Compress_File_to_zip(filename);
 
-            System.out.print("Input  file name out from zip (for instance, \"j.txt\"): ");
-            String file_out_name = in.next();
+                System.out.print("Input  file name out from zip (for instance, \"j.txt\"): ");
+                String file_out_name = in.next();
 
-            Decompress_File_from_zip(file_out_name);
-        }
+                Decompress_File_from_zip(file_out_name);
+            }
 
-        System.out.print("\nDo you want to encrypt your text?\nYES - enter 1, NO - enter 2 ");
-        n = in.nextInt();
+            System.out.print("\nDo you want to encrypt your text?\nYES - enter 1, NO - enter 2 ");
+            n = in.nextInt();
 
-        String text_enc = text;
+            String text_enc = text;
 
-        if(n==1)
-        {
-            text_enc = Encrypt_text((text));
-        }
+            if (n == 1) {
+                text_enc = Encrypt_text((text));
+            }
 
-        System.out.print("\nDo you want to decrypt your text? \nYES - enter 1, NO - enter 2 ");
-        n = in.nextInt();
+            System.out.print("\nDo you want to decrypt your text? \nYES - enter 1, NO - enter 2 ");
+            n = in.nextInt();
 
-        String text_dec = text;
+            String text_dec = text;
 
-        if(n==1)
-        {
-            text_dec = Decrypt_text(text_enc);
+            if (n == 1) {
+                text_dec = Decrypt_text(text_enc);
+            }
         }
 
         System.out.println("\nInput 1(regular) or 2(without regular) : ");
@@ -174,14 +214,13 @@ public class Program {
     }
 
 
-    public static void write_to_fail(String text,String filename,String file_type)
+    public static void write_to_fail(String text,String filename)
     {
-        try(FileOutputStream fos=new FileOutputStream(filename+"."+file_type))//запись в файл
+        try(FileOutputStream fos=new FileOutputStream(filename))//запись в файл
         {
             byte[] buffer = text.getBytes();
-
             fos.write(buffer, 0, buffer.length);
-            System.out.println("The file has been written\n");
+            //System.out.println("The file has been written\n");
         }
         catch (IOException ex)
         {
@@ -190,31 +229,33 @@ public class Program {
     }
 
 
-    public static void read_from_file(String filename,String file_type)
+    public static String read_from_file(String filename,String file_type)
     {
+        String txt_in_file = "";
         try(FileReader reader = new FileReader(filename+"."+file_type))//чтение из файла
         {
             int c;
-            System.out.print("Text in file: ");
             while((c =reader.read())!=-1)
             {
-                System.out.print((char)c);//то что в файле
+                txt_in_file += (char)c;
             }
         }
         catch(IOException ex)
         {
             System.out.println(ex.getMessage());
         }
+
+        return txt_in_file;
     }
 
 
-    public static void Compress_File_to_zip(String filename,String file_type)
+    public static void Compress_File_to_zip(String filename)
     {
         Scanner in = new Scanner(System.in);
         System.out.print("\nInput zip file name in : ");
         String zip_name = in.nextLine();
 
-        Compression_zip.compress(filename, zip_name, file_type);
+        Compression_zip.compress(filename, zip_name);
     }
 
 

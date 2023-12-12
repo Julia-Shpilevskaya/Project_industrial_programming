@@ -1,9 +1,8 @@
+import file_types.XML;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -20,15 +19,21 @@ public class Program {
                                                    IllegalBlockSizeException, IOException, NoSuchAlgorithmException,
                                                    BadPaddingException, InvalidKeyException {
         Scanner in = new Scanner(System.in);
-        System.out.print("Input filename in: ");
+        System.out.print("Input filename in ('input', 'file'): ");
         String filename = in.nextLine();
 
-        System.out.print("Input type of the file in(txt,xml,json): ");
+        System.out.print("Input type of the file in (txt, xml, json): ");
         String file_type = in.nextLine();
 
         System.out.print("Input text in: ");
         String text = in.nextLine();
 
+        XML j = new XML();
+
+        j.Write(filename+"."+file_type, text);
+
+        String d = j.Read(filename+"."+file_type);
+        System.out.print(d);
 
         /*JSON j = new JSON();
 
@@ -79,11 +84,11 @@ public class Program {
         }
         else if (n==2)
         {
-            write_to_fail(text, filename);
+            //write_to_fail(text, filename);
 
-            String txt_from_file = read_from_file(filename, file_type);
+            //String txt_from_file = read_from_file(filename, file_type);
             System.out.print("Text in file: ");
-            System.out.print(txt_from_file);
+            //System.out.print(txt_from_file);
 
             System.out.print("Is your file archived?)\nEnter 3, if \"YES\"\nEnter 4, if \"NO\"");
             n = in.nextInt();
@@ -221,7 +226,7 @@ public class Program {
     }
 
 
-    public static void write_to_fail(String text,String filename)
+   /* public static void write_to_fail(String text,String filename)
     {
         try(FileOutputStream fos=new FileOutputStream(filename))//запись в файл
         {
@@ -253,7 +258,7 @@ public class Program {
         }
 
         return txt_in_file;
-    }
+    }*/
 
 
     public static void Compress_File_to_zip(String filename)

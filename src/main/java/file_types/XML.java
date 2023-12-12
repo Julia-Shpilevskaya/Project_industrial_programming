@@ -1,3 +1,5 @@
+package file_types;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -28,11 +30,11 @@ public class XML {
             if (expressionList.getLength() > 0) {
                 Element expressionElement = (Element) expressionList.item(0);
                 String expression = expressionElement.getTextContent();
-                System.out.println("Математическое выражение: " + expression);
+                System.out.println("mathExpression: " + expression);
 
                 return expression;
             } else {
-                System.out.println("Элемент выражения не найден в XML-файле.");
+                System.out.println("The expression element was not found in the XML file.");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +42,7 @@ public class XML {
         return null;
     }
 
-    public void Write(String expressionString)
+    public void Write(String file_name, String expressionString)
     {
         try {
             // Создание фабрики для создания парсера DOM
@@ -65,10 +67,10 @@ public class XML {
 
             // Запись в файл
             DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult("output.xml");
+            StreamResult result = new StreamResult(file_name);
             transformer.transform(source, result);
 
-            System.out.println("XML файл успешно создан.");
+            System.out.println("The XML file has been successfully created.");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -76,3 +78,4 @@ public class XML {
         }
     }
 }
+

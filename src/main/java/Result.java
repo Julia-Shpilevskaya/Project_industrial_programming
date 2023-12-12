@@ -1,7 +1,5 @@
 
-class Result
-{
-
+class Result {
     public double acc;
     public String rest;
 

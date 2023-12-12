@@ -30,6 +30,13 @@ public class Program {
         String text = in.nextLine();
 
 
+        /*JSON j = new JSON();
+
+        j.Write(filename+"."+file_type, text);
+
+        String d = j.Read(filename+"."+file_type);
+        System.out.print(d);*/
+
         int n = 0;
 
         System.out.print("Want use Decorator\nEnter 1\n Don't want use  \nEnter 2\n");

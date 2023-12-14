@@ -12,11 +12,12 @@ public class Compression_zip {
         {
             ZipEntry entry;
             String name;
+
             while((entry=zin.getNextEntry())!=null)
             {
-                // распаковка
                 FileOutputStream fout = new FileOutputStream(filename_out);
-                for (int c = zin.read(); c != -1; c = zin.read()) {
+                for (int c = zin.read(); c != -1; c = zin.read())
+                {
                     fout.write(c);
                 }
 
@@ -24,13 +25,14 @@ public class Compression_zip {
                 {
                     int i;
                     System.out.print("From file after decompress: ");
-                    while((i=fin2.read())!=-1){
 
+                    while((i=fin2.read())!=-1)
+                    {
                         System.out.print((char)i);
                     }
                 }
-                catch(IOException ex){
-
+                catch(IOException ex)
+                {
                     System.out.println(ex.getMessage());
                 }
 
@@ -39,8 +41,8 @@ public class Compression_zip {
                 fout.close();
             }
         }
-        catch(Exception ex){
-
+        catch(Exception ex)
+        {
             System.out.println(ex.getMessage());
         }
     }
@@ -53,19 +55,16 @@ public class Compression_zip {
         {
             ZipEntry entry1=new ZipEntry(filename_in);
             zout.putNextEntry(entry1);
-            // считываем содержимое файла в массив byte
+
             byte[] buffer2 = new byte[fis.available()];
             fis.read(buffer2);
-            // добавляем содержимое к архиву
             zout.write(buffer2);
-            // закрываем текущую запись для новой записи
             zout.closeEntry();
         }
-        catch(Exception ex){
-
+        catch(Exception ex)
+        {
             System.out.println(ex.getMessage());
         }
     }
-
 }
 

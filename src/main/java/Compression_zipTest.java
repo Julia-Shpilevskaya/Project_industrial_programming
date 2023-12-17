@@ -74,13 +74,13 @@ class Compression_zipTest {
 
     @Test
     void compress() throws IOException {
-        File file1 = File.createTempFile("file1",".txt");
+        File file1 = new File("archive.txt");
 
         Compression_zip comp = new Compression_zip();
 
-        String zipFilename = "archive.zip";
+        String zipFilename = "file1.zip";
 
-        comp.compress("file1","archive.txt");
+        comp.compress("archive.txt","file1");
 
         File zipFile = new File(zipFilename);
 

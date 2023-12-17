@@ -1,3 +1,7 @@
+import file_types.JSON;
+import file_types.TXT;
+import file_types.XML;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,10 +29,19 @@ public class Compression_zip {
                 {
                     int i;
                     System.out.print("From file after decompress: ");
+                    String text="";
 
-                    while((i=fin2.read())!=-1)
-                    {
-                        System.out.print((char)i);
+                    if(filename_out.endsWith(".txt")) {
+                        TXT txt = new TXT();
+                        text = txt.Read(filename_out);
+                    }
+                    else if(filename_out.endsWith(".xml")) {
+                        XML xml = new XML();
+                        text = xml.Read(filename_out);
+                    }
+                    else if(filename_out.endsWith(".json")) {
+                        JSON json = new JSON();
+                        text = json.Read(filename_out);
                     }
                 }
                 catch(IOException ex)
@@ -50,15 +63,28 @@ public class Compression_zip {
 
     public static void compress(String filename_in, String zip_name)
     {
-        try(ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zip_name+".zip"));
-            FileInputStream fis= new FileInputStream(filename_in);)
-        {
+        try(ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zip_name+".zip"))) {
+            String text="";
+
+            if(filename_in.endsWith(".txt")) {
+                TXT txt = new TXT();
+                text = txt.Read(filename_in);
+            }
+            else if(filename_in.endsWith(".xml")) {
+                XML xml = new XML();
+                text = xml.Read(filename_in);
+            }
+            else if(filename_in.endsWith(".json")) {
+                JSON json = new JSON();
+                text = json.Read(filename_in);
+            }
+
             ZipEntry entry1=new ZipEntry(filename_in);
             zout.putNextEntry(entry1);
 
-            byte[] buffer2 = new byte[fis.available()];
-            fis.read(buffer2);
-            zout.write(buffer2);
+            //byte[] buffer2 = new byte[text.getBytes()];
+
+            zout.write(text.length());
             zout.closeEntry();
         }
         catch(Exception ex)

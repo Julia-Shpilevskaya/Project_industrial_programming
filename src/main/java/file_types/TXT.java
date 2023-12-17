@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class TXT {
     public void Write(String text,String filename) {
-        try(FileOutputStream fos=new FileOutputStream(filename))//запись в файл
+        try(FileOutputStream fos=new FileOutputStream(filename))
         {
             byte[] buffer = text.getBytes();
             fos.write(buffer, 0, buffer.length);
@@ -21,7 +21,7 @@ public class TXT {
 
     public  String Read(String filename) {
         String txt_in_file = "";
-        try(FileReader reader = new FileReader(filename))//чтение из файла
+        try(FileReader reader = new FileReader(filename))
         {
             int c;
             while((c =reader.read())!=-1)

@@ -12,7 +12,6 @@ import java.io.IOException;
 public class JSON {
     public void Write(String file_name, String expression)
     {
-        // Запись математического выражения в файл JSON
         JSONObject obj = new JSONObject();
         obj.put("MathExpression", expression);
 
@@ -27,7 +26,6 @@ public class JSON {
 
     public String Read(String file_name)
     {
-        // Чтение математического выражения из файла JSON
         JSONParser parser = new JSONParser();
 
         try (FileReader reader = new FileReader(file_name)) {
@@ -44,4 +42,3 @@ public class JSON {
         return null;
     }
 }
-

@@ -17,14 +17,12 @@ class Compression_zipTest {
 
         File file3 = new File(file_n);
 
-        try(BufferedWriter writer = new BufferedWriter((new FileWriter((file3)))))
-        {
+        try(BufferedWriter writer = new BufferedWriter((new FileWriter((file3))))) {
             writer.write("Test file 1");
         }
 
         try(ZipOutputStream zos = new ZipOutputStream((new FileOutputStream(zipFilename)));
-            FileInputStream fis = new FileInputStream(file3);)
-        {
+            FileInputStream fis = new FileInputStream(file3);) {
             ZipEntry entry1 = new ZipEntry(file_n);
             zos.putNextEntry(entry1);
 
@@ -41,21 +39,19 @@ class Compression_zipTest {
 
         comp2.decompress(file_n,"archive1");
 
-        // File exf = new File("file4"+File.separator+"file11.txt");
-        File e = new File(file_n);
+        File file_f = new File(file_n);
 
-        assertTrue(e.exists());
+        assertTrue(file_f.exists());
 
         String c1 ="";
-        try(FileReader reader = new FileReader(file_n))//чтение из файла
-        {
+
+        try(FileReader reader = new FileReader(file_n)) {
             int c;
             while((c =reader.read())!=-1)
             {
                 c1+=(char)c;
             }
-        }
-        catch(IOException ex)
+        } catch(IOException ex)
         {
             System.out.println(ex.getMessage());
             System.out.println("this place");
@@ -63,7 +59,7 @@ class Compression_zipTest {
 
         Assert.assertEquals("Test file 1",c1);
 
-        e.delete();
+        file_f.delete();
         file3.delete();
     }
 

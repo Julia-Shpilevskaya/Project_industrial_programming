@@ -46,40 +46,31 @@ public class Program {
 
         System.out.print("Math expression in file (" + filename + "." + file_type + ") : " + text);
 
-        String num = "";
-
-        System.out.print("\nWant use Decorator\nEnter 1\n Don't want use  \nEnter 2\n");
-        num = in.nextLine();
-
         String n = "";
 
-        if (num.equals("1")) {
+        System.out.print("Is your file archived?)\nEnter 1, if \"YES\"\nEnter 2, if \"NO\" ");
+        n = in.nextLine();
 
-        } else if (num.equals("2")) {
-            System.out.print("Is your file archived?)\nEnter 1, if \"YES\"\nEnter 2, if \"NO\" ");
+        if (n.equals("1")) {
+            System.out.print("\nIf zip, enter 10\n ");
             n = in.nextLine();
 
-            if (n.equals("1")) {
-                System.out.print("\nIf zip, enter 10\n ");
-                n = in.nextLine();
+            if (n.equals("10")) {
+                System.out.print("\nInput  file name out from zip ('input.txt', 'fil.xml'): ");
+                String file_out_name = in.next();
 
-                if (n.equals("10")) {
-                    System.out.print("\nInput  file name out from zip ('input.txt', 'fil.xml'): ");
-                    String file_out_name = in.next();
-
-                    Decompress_File_from_zip(file_out_name);
-                } else {
-                    System.out.print("\nERROR. Program can only zip. Your file isn't zip.");
-                    return;
-                }
+                Decompress_File_from_zip(file_out_name);
+            } else {
+                System.out.print("\nERROR. Program can only zip. Your file isn't zip.");
+                return;
             }
+        }
 
-            System.out.print("\nIs your text encrypted?)\nEnter 1, if \"YES\"\nEnter 2, if \"NO\"");
-            n = in.nextLine();
+        System.out.print("\nIs your text encrypted?)\nEnter 1, if \"YES\"\nEnter 2, if \"NO\"");
+        n = in.nextLine();
 
-            if (n.equals("1")) {
-                text = Decrypt_text(text);
-            }
+        if (n.equals("1")) {
+            text = Decrypt_text(text);
         }
 
         System.out.println("\nWant use regular\nEnter 1\n Want without regular\nEnter 2 : ");
@@ -91,29 +82,25 @@ public class Program {
             String result = evaluate(text);
         }
 
-        if(num.equals("1")) {
+        System.out.print("\nDo you want to encrypt your text?\nYES - enter 1, NO - enter 2 ");
+        n = in.nextLine();
 
-        } else if(num.equals("2")) {
-            System.out.print("\nDo you want to encrypt your text?\nYES - enter 1, NO - enter 2 ");
+        if (n.equals("1")) {
+            text = Encrypt_text((text));
+        }
+
+        System.out.print("\nDo you want to archive your file? \nYES - enter 1, NO - enter 2 ");
+        n = in.nextLine();
+
+        if (n.equals("1")) {
+            System.out.print("\nIf you want zip, enter 10\n  ");
             n = in.nextLine();
 
-            if (n.equals("1")) {
-                text = Encrypt_text((text));
-            }
+            if (n.equals("10")) {
+                System.out.print("Input (existing file) file name in zip ('input.txt', 'enter.json') : ");
+                String file_name = in.next();
 
-            System.out.print("\nDo you want to archive your file? \nYES - enter 1, NO - enter 2 ");
-            n = in.nextLine();
-
-            if (n.equals("1")) {
-                System.out.print("\nIf you want zip, enter 10\n  ");
-                n = in.nextLine();
-
-                if (n.equals("10")) {
-                    System.out.print("Input (existing file) file name in zip ('input.txt', 'enter.json') : ");
-                    String file_name = in.next();
-
-                    Compress_File_to_zip(file_name);
-                }
+                Compress_File_to_zip(file_name);
             }
         }
 

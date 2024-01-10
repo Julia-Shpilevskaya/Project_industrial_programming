@@ -1,3 +1,7 @@
+import archive.Compression_zip;
+import encryption.AESUtil;
+import expression.MatchParser;
+import expression.RegularExpressions;
 import file_types.JSON;
 import file_types.TXT;
 import file_types.XML;

@@ -1,3 +1,4 @@
+package encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -10,25 +11,25 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 public class AESUtil {
-        private static String charset = "utf-8";
-        private static int offset = 16;
-        private static String transformation = "AES/CBC/PKCS5Padding";
-        private static String algorithm = "AES";
+    private static String charset = "utf-8";
+    private static int offset = 16;
+    private static String transformation = "AES/CBC/PKCS5Padding";
+    private static String algorithm = "AES";
 
 
-        public static SecretKey generateKey(int n) throws NoSuchAlgorithmException {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(n);
-            SecretKey key = keyGenerator.generateKey();
-            return key;
-        }
+    public static SecretKey generateKey(int n) throws NoSuchAlgorithmException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(n);
+        SecretKey key = keyGenerator.generateKey();
+        return key;
+    }
 
 
-        public static IvParameterSpec generateIv() {
-            byte[] iv = new byte[16];
-            new SecureRandom().nextBytes(iv);
-            return new IvParameterSpec(iv);
-        }
+    public static IvParameterSpec generateIv() {
+        byte[] iv = new byte[16];
+        new SecureRandom().nextBytes(iv);
+        return new IvParameterSpec(iv);
+    }
 
 
     private static final String key = "aesEncryptionKey";
@@ -77,3 +78,4 @@ public class AESUtil {
         return null;
     }
 }
+

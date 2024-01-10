@@ -1,4 +1,4 @@
-
+package archive;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -10,11 +10,6 @@ import java.util.zip.ZipOutputStream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Compression_zipTest {
-
-    /*@BeforeEach
-    void setUp() {
-    }
-*/
     @Test
     void decompress() throws IOException {
         String zipFilename = "archive1.zip";
@@ -28,25 +23,25 @@ class Compression_zipTest {
         }
 
         try(ZipOutputStream zos = new ZipOutputStream((new FileOutputStream(zipFilename)));
-        FileInputStream fis = new FileInputStream(file3);)
-            {
-                ZipEntry entry1 = new ZipEntry(file_n);
-                zos.putNextEntry(entry1);
+            FileInputStream fis = new FileInputStream(file3);)
+        {
+            ZipEntry entry1 = new ZipEntry(file_n);
+            zos.putNextEntry(entry1);
 
-                byte[] buffer = new byte[1024];
-                int length;
-                while((length=fis.read(buffer))>0)
-                {
-                    zos.write(buffer,0,length);
-                }
+            byte[] buffer = new byte[1024];
+            int length;
+            while((length=fis.read(buffer))>0)
+            {
+                zos.write(buffer,0,length);
             }
+        }
 
         Compression_zip comp2 = new Compression_zip();
         file_n = "file4.txt";
 
         comp2.decompress(file_n,"archive1");
 
-       // File exf = new File("file4"+File.separator+"file11.txt");
+        // File exf = new File("file4"+File.separator+"file11.txt");
         File e = new File(file_n);
 
         assertTrue(e.exists());

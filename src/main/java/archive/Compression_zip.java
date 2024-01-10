@@ -1,3 +1,5 @@
+package archive;
+
 import file_types.JSON;
 import file_types.TXT;
 import file_types.XML;
@@ -93,4 +95,5 @@ public class Compression_zip {
         }
     }
 }
+
 

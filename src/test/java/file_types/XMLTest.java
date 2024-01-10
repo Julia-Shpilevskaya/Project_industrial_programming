@@ -21,35 +21,27 @@ class XMLTest {
         String text = "10+44*(5+6)*9";
 
         try {
-            // Создание фабрики для создания парсера DOM
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            // Создание нового документа XML
             Document document = builder.newDocument();
 
-            // Создание корневого элемента
             Element root = document.createElement("mathExpression");
             document.appendChild(root);
 
-            // Создание и добавление элемента выражения
             Element expressionElement = document.createElement("expression");
             expressionElement.setTextContent(text);
             root.appendChild(expressionElement);
 
-            // Создание объекта Transformer для записи в файл
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
 
-            // Запись в файл
             DOMSource source = new DOMSource(document);
             StreamResult result = new StreamResult("file12.xml");
             transformer.transform(source, result);
-        }
-        catch (ParserConfigurationException e) {
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -58,8 +50,6 @@ class XMLTest {
         String text_in_file = xml.Read("file12.xml");
 
         Assert.assertEquals(text,text_in_file);
-
-
     }
 
     @Test
@@ -74,13 +64,10 @@ class XMLTest {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        // Чтение XML-файла
         Document document = builder.parse("file11.xml");
 
-        // Получение корневого элемента
         Element root = document.getDocumentElement();
 
-        // Получение элемента выражения
         NodeList expressionList = root.getElementsByTagName("expression");
 
            if (expressionList.getLength() > 0) {
@@ -88,12 +75,10 @@ class XMLTest {
             String expression = expressionElement.getTextContent();
 
             Assert.assertEquals(text,expression);
-            }
-            else {
+            } else {
             System.out.println("The expression element was not found in the XML file.");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         e.printStackTrace();
         }
     }
